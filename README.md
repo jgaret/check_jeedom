@@ -1,4 +1,4 @@
-== README ==
+## README
 
 This plugin allows you to check jeedom from json-rpc API.
 
@@ -7,7 +7,7 @@ For the moment, this plugin checks :
 * state of plugins with daemons
 * status of available plugin updates
 
-=== usage ===
+### Usage
 ```
 usage: check_jeedom [-h] [--name NAME] [--apikey APIKEY] [--host HOST]
                     [-w WARNING] [-c CRITICAL]
@@ -17,7 +17,8 @@ usage: check_jeedom [-h] [--name NAME] [--apikey APIKEY] [--host HOST]
 `--host` and `--apikey`are mandatory arguments to connect to jeedom host
 `--name` is used to specify a plugin name to check this daemon
 
-=== prerequisite ===
+### Prerequisites
+
 To work, it needs the following python modules :
 * urllib2
 * json
