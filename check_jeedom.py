@@ -5,12 +5,11 @@ import argparse
 import sys
 
 #Handler for json-rpc API
-class handler:
+class rpchandler:
     parameters = {
           "jsonrpc" : "2.0",
-          "method" : "ping",
           "params" : {},
-          "id" : "0" }
+    }
 
     headers = { 'Content-Type': 'application/json' }
 
@@ -18,19 +17,14 @@ class handler:
         self.ip = ip
         self.parameters["params"]["apikey"] = apikey
 
-
-    def ping(self):
-        self.parameters["method"] = "ping"
-        return self.send()
-
     def send(self):
         data = json.dumps(self.parameters)
         url = "http://%s/core/api/jeeApi.php"% ( self.ip )
         req = urllib2.Request(url, data, self.headers)
         response = urllib2.urlopen(req)
-        fulljson = response.read()
-        myjson = json.loads(fulljson)
-        return  myjson["result"]
+        content = response.read()
+        json_content = json.loads(content)
+        return  json_content["result"]
 
     def method(self, method):
         self.parameters["method"] = method
@@ -47,9 +41,8 @@ parser.add_argument('-c', '--critical', default=0, help='percent of failed plugi
 
 args=parser.parse_args()
 
-api = handler(args.host, args.apikey)                  
+api = rpchandler(args.host, args.apikey)                  
 
-import pprint, json                                                             
 
 if args.type == 'update':
     plugins_update = []
@@ -105,9 +98,9 @@ if args.type == 'plugin':
             sys.exit(2)
 
         if failed_percent > float(args.warning):
-            print("Warning: %d/%d plugins down" % (nb_failed, nb_all))
+            print("Warning: %d/%d plugins down %s" % (nb_failed, nb_all,plugins_state['nok']))
             sys.exit(1)
 
-        print("OK: %d/%d plugins down" % (nb_failed, nb_all))
+        print("OK: none of %d plugins down" % (nb_all))
         sys.exit(0)
 
