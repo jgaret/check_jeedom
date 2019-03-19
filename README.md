@@ -1,4 +1,5 @@
 == README ==
+
 This plugin allows you to check jeedom from json-rpc API.
 
 For the moment, this plugin checks :
@@ -7,7 +8,8 @@ For the moment, this plugin checks :
 * status of available plugin updates
 
 === usage ===
-```usage: check_jeedom [-h] [--name NAME] [--apikey APIKEY] [--host HOST]
+```
+usage: check_jeedom [-h] [--name NAME] [--apikey APIKEY] [--host HOST]
                     [-w WARNING] [-c CRITICAL]
                     {status,plugin,update}
 ```
